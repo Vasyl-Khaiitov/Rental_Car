@@ -1,0 +1,39 @@
+.button {
+  border-radius: 12px;
+  width: 100%;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-semiBold);
+  font-size: 16px;
+  color: var(--white);
+  border: none;
+  /* margin-top: 10px; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* gap: 12px; */
+  background-color: var(--button);
+
+  transition: background-color 300ms ease, box-shadow 300ms ease,
+    border 300ms ease, color 300ms ease, border-radius 300ms ease,
+    border-bottom 300ms ease, opacity 300ms ease;
+}
+
+.button:hover,
+.button:focus {
+  background-color: var(--button-hover);
+}
+
+/* --------white-------- */
+.white {
+  background-color: transparent;
+  color: var(--main);
+  border: 1px solid var(--button);
+}
+
+.button.white:hover,
+.button.white:focus {
+  border: 1px solid var(--button-hover);
+}
