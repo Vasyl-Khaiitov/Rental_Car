@@ -1,0 +1,11 @@
+.form {
+  display: flex;
+}
+
+.select_brand {
+  min-width: 204px;
+}
+
+.select_price {
+  min-width: 196px;
+}

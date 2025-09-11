@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
-    <section className={css.hero}>
+    <div className={css.hero}>
       <div className={css.container}>
         <h1 className={css.title}>Find your perfect rental car</h1>
         <p className={css.text}>
@@ -20,6 +20,6 @@ export default function Hero() {
           />
         </Link>
       </div>
-    </section>
+    </div>
   );
 }

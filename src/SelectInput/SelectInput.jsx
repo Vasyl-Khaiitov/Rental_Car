@@ -1,8 +1,8 @@
 import { useId } from "react";
-import css from "./Select.module.css";
+import css from "./SelectInput.module.css";
 import { Field, useField } from "formik";
 
-export default function Select({
+export default function SelectInput({
   name,
   placeholder,
   labelText,

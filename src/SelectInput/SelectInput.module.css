@@ -16,7 +16,6 @@
   border: none;
   border-radius: 12px;
   padding: 12px;
-  width: 100%;
   font-family: var(--font-family);
   font-weight: var(--font-weight-regular);
   font-size: 16px;
@@ -30,7 +29,9 @@
   white-space: nowrap;
   height: 44px;
 }
-
+.inputClassName {
+  max-width: 204px;
+}
 /* ? Review later */
 .empty {
   font-family: var(--font-family);
