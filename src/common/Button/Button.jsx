@@ -8,7 +8,6 @@ export default function Button({
   styleType,
   paddingsY = 8,
   paddingsX = 0,
-  disabled = false,
   onClick,
   children,
   className,
@@ -22,7 +21,6 @@ export default function Button({
     <button
       className={clsx(css.button, styleType && css[styleType], className)}
       type={type}
-      disabled={disabled}
       style={{
         padding: `${adjustedPaddingsY}px ${paddingsX}px`,
       }}
