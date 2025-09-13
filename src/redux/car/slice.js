@@ -13,10 +13,22 @@ const carSlice = createSlice({
     error: null,
     currentCar: null,
     hasFetched: false,
+    filters: {
+      brand: "",
+      rentalPrice: "",
+      mileageFrom: "",
+      mileageTo: "",
+    },
   },
   reducers: {
     setPage: (state, { payload }) => {
       state.page = payload;
+      state.hasFetched = false;
+    },
+    setFilters: (state, { payload }) => {
+      state.filters = payload;
+      state.page = 1;
+      state.items = [];
       state.hasFetched = false;
     },
   },
@@ -44,5 +56,5 @@ const carSlice = createSlice({
   },
 });
 
-export const { setPage } = carSlice.actions;
+export const { setPage, setFilters } = carSlice.actions;
 export default carSlice.reducer;

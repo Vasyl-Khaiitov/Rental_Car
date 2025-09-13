@@ -12,3 +12,18 @@
   margin: 0 auto;
   margin-bottom: 124px;
 }
+
+.no_results {
+  text-align: center;
+  font-size: 18px;
+  color: red;
+  margin-top: 40px;
+}
+
+.text_notFound {
+  margin-bottom: 20px;
+}
+
+.btn_reset {
+  margin: 0 auto;
+}

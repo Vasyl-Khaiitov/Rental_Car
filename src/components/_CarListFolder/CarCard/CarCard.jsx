@@ -39,7 +39,15 @@ export default function CarCard({
   return (
     <>
       <div className={css.img_wrapper}>
-        <img src={img} alt={`${brand} ${model}`} className={css.img_card} />
+        <img
+          src={img}
+          alt={`${brand} ${model}`}
+          className={css.img_card}
+          loading="lazy"
+          decoding="async"
+          width="276"
+          height="268"
+        />
         <button
           className={css.icon_btn}
           onClick={handleToggleFavorite}

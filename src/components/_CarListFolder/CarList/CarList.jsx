@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CarCard from "../CarCard/CarCard";
 import { useEffect } from "react";
 import {
+  selectCarFilters,
   selectCarItems,
   selectCarPage,
   selectHasFetched,
@@ -12,10 +13,15 @@ import {
 import { fetchCars } from "../../../redux/car/operation";
 import ButtonUp from "../../../common/ButtonUp/ButtonUp";
 import Button from "../../../common/Button/Button";
-import { setPage } from "../../../redux/car/slice";
+import { setFilters, setPage } from "../../../redux/car/slice";
+import { isActiveFilter } from "../../../utils/activFilterUtils";
 
 export default function CarList() {
   const dispatch = useDispatch();
+
+  const filters = useSelector(selectCarFilters);
+
+  const isFiltered = isActiveFilter(filters);
 
   const cars = useSelector(selectCarItems);
   const page = useSelector(selectCarPage);
@@ -25,9 +31,11 @@ export default function CarList() {
 
   useEffect(() => {
     if (!hasFetched) {
-      dispatch(fetchCars({ page }));
+      const payload = isFiltered ? { ...filters, page } : { page };
+
+      dispatch(fetchCars(payload));
     }
-  }, [dispatch, page]);
+  }, [dispatch, page, filters, hasFetched]);
 
   const handleLoadMore = () => {
     if (!isLoading) {
@@ -36,8 +44,34 @@ export default function CarList() {
     }
   };
 
+  const handleResetFilters = () => {
+    dispatch(
+      setFilters({
+        brand: "",
+        rentalPrice: "",
+        mileageFrom: "",
+        mileageTo: "",
+      })
+    );
+  };
+
   return (
     <>
+      {cars.length === 0 && hasFetched && !isLoading && (
+        <div className={css.no_results}>
+          <p className={css.text_notFound}>
+            No cars found matching your criteria.
+          </p>
+          <Button
+            type="button"
+            name="Reset filters"
+            className={css.btn_reset}
+            styleType="white"
+            onClick={handleResetFilters}
+            paddingsX={24}
+          />
+        </div>
+      )}
       <ul className={css.car_list}>
         {cars.map((car) => (
           <li key={car.id} className={css.list_items}>
