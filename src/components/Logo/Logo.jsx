@@ -4,7 +4,7 @@ import Icon from "../../assets/Icon/Icon";
 export default function Logo() {
   return (
     <>
-      <Icon name="icon-logo" classname={css.iconLogo} aria-label="icon-logo" />
+      <Icon name="icon-logo" className={css.iconLogo} aria-label="icon-logo" />
     </>
   );
 }

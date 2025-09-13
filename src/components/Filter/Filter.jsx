@@ -1,7 +1,7 @@
 import css from "./Filter.module.css";
 import { Field, Form, Formik } from "formik";
 import Button from "../../common/Button/Button";
-import SelectInput from "../../SelectInput/SelectInput";
+import SelectInput from "../SelectInput/SelectInput";
 
 const initialValues = {
   brand: "",
@@ -43,7 +43,12 @@ export default function Filter() {
 
             <Field type="number" name="mileageTo" placeholder="To" />
           </div>
-          <Button type="submit" name="Search" paddingsY={12} paddingsX={51} />
+          <Button
+            type="submit"
+            name="Search"
+            paddingsX={51}
+            className={css.btn_srch}
+          />
         </Form>
       </Formik>
     </div>

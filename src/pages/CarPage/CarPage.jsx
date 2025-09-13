@@ -1,3 +1,9 @@
+import CarDetails from "../../components/_CarDetailsFolder/CarDetails/CarDetails";
+
 export default function CarPage() {
-  return <>Hello i'm Car Page</>;
+  return (
+    <section>
+      <CarDetails />
+    </section>
+  );
 }

@@ -1,0 +1,29 @@
+.img_wrapper {
+  position: relative;
+}
+
+.img_card {
+  object-fit: cover;
+}
+
+.icon_btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.icon_heart {
+  width: 16px;
+  height: 16px;
+}
+.btn_ReadMore {
+  width: 100%;
+}
+
+.span_model {
+  color: var(--button);
+}

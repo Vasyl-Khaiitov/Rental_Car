@@ -6,7 +6,7 @@ export default function Button({
   type,
   name,
   styleType,
-  paddingsY = 8,
+  paddingsY = 12,
   paddingsX = 0,
   onClick,
   children,
@@ -14,7 +14,7 @@ export default function Button({
 }) {
   const adjustedPaddingsY =
     typeof name !== "string" && React.isValidElement(name)
-      ? paddingsY + 8
+      ? paddingsY + 12
       : paddingsY;
 
   return (

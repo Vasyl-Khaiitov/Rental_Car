@@ -1,0 +1,14 @@
+.car_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px 32px;
+  margin-bottom: 80px;
+}
+.list_items {
+  max-width: 276px;
+}
+
+.btn_loadMore {
+  margin: 0 auto;
+  margin-bottom: 124px;
+}

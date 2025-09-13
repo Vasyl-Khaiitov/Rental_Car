@@ -1,7 +1,19 @@
 {
   "$schema": "https://biomejs.dev/schemas/project.json",
   "linter": {
-    "enabled": true
+    "enabled": true,
+    "rules": {
+      "recommended": true,
+      "a11y": {
+        "noAutofocus": "error"
+      },
+      "suspicious": {
+        "noUndef": "error"
+      },
+      "style": {
+        "useCamelCase": "warn"
+      }
+    }
   },
   "formatter": {
     "enabled": true
