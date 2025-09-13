@@ -33,15 +33,19 @@ export default function Filter() {
             placeholder="Choose a price"
           />
           <div className={css.mileageGroup}>
-            <label htmlFor="mileageFrom">Car mileage/km</label>
+            <label htmlFor="mileageFromTo">Car mileage/km</label>
             <Field
               type="number"
               name="mileageFrom"
-              id="mileageFrom"
+              id="mileageFromTo"
               placeholder="From"
             />
-
-            <Field type="number" name="mileageTo" placeholder="To" />
+            <Field
+              type="number"
+              id="mileageFromTo"
+              name="mileageTo"
+              placeholder="To"
+            />
           </div>
           <Button
             type="submit"

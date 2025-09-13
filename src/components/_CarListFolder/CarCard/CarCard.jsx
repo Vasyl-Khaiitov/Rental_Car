@@ -39,7 +39,7 @@ export default function CarCard({
   return (
     <>
       <div className={css.img_wrapper}>
-        <img src={img} alt="Car photo" className={css.img_card} />
+        <img src={img} alt={`${brand} ${model}`} className={css.img_card} />
         <button
           className={css.icon_btn}
           onClick={handleToggleFavorite}
