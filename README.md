@@ -18,10 +18,11 @@ Tech Stack:
 - React Router
 - React Toastify
 - CSS Modules
-- 
+  
 Getting Started:
 
 -npm install
+
 -npm start
 
 
