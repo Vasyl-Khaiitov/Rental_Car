@@ -26,3 +26,4 @@ Getting Started:
 -npm start
 
 
+Developer Vasyl Khaitov
