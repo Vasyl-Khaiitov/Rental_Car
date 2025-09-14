@@ -1,9 +1,7 @@
 .header {
-  background-color: var(--badges);
   width: 100%;
 }
 
 .container {
-  border-bottom: 1px solid #f2f4f7;
   margin-bottom: 4px;
 }

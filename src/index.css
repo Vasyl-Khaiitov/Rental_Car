@@ -30,7 +30,8 @@ body {
   line-height: 1.25;
   margin: 0;
   height: 100%;
-  background: var(--white);
+  background: linear-gradient(to bottom, var(--badges) 68px, var(--white) 60px);
+  border-bottom: 1px solid var(--badges);
 }
 
 #root {
