@@ -11,6 +11,7 @@ export default function Button({
   onClick,
   children,
   className,
+  disabled = false,
 }) {
   const adjustedPaddingsY =
     typeof name !== "string" && React.isValidElement(name)
@@ -19,12 +20,18 @@ export default function Button({
 
   return (
     <button
-      className={clsx(css.button, styleType && css[styleType], className)}
+      className={clsx(
+        css.button,
+        styleType && css[styleType],
+        className,
+        disabled && css.disabled
+      )}
       type={type}
       style={{
         padding: `${adjustedPaddingsY}px ${paddingsX}px`,
       }}
       onClick={onClick}
+      disabled={disabled}
     >
       {name} {children}
     </button>
