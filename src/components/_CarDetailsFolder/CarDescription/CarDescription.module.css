@@ -85,3 +85,7 @@
   font-weight: var(--font-weight-medium);
   margin-bottom: 16px;
 }
+
+.list_items:last-child {
+  margin-bottom: 0;
+}
