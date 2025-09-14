@@ -1,4 +1,4 @@
-🚗 Car Rental App
+  Car Rental App
 Car Rental App is a modern web application that allows users to easily browse, filter, and book cars online. With a clean  interface, the app is built using React, Redux Toolkit, and Formik for smooth form handling and validation.
 
  Key Features:
