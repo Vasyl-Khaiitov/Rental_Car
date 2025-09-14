@@ -6,19 +6,21 @@ import Logo from "../../Logo/Logo";
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
-
 export default function Navigation() {
   return (
-    <nav>
-      <NavLink to="/">
+    <nav className={css.nav}>
+      <NavLink to="/" className={css.logo}>
         <Logo />
       </NavLink>
-      <NavLink to="/" className={buildLinkClass}>
-        <h2>Home</h2>
-      </NavLink>
-      <NavLink to="/catalog" className={buildLinkClass}>
-        <h2>Catalog</h2>
-      </NavLink>
+
+      <div className={css.links}>
+        <NavLink to="/" className={buildLinkClass}>
+          <p>Home</p>
+        </NavLink>
+        <NavLink to="/catalog" className={buildLinkClass}>
+          <p>Catalog</p>
+        </NavLink>
+      </div>
     </nav>
   );
 }
