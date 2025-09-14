@@ -1,12 +1,39 @@
-# React + Vite
+🚗 Car Rental App
+Car Rental App is a modern web application that allows users to easily browse, filter, and book cars online. With a clean  interface, the app is built using React, Redux Toolkit, and Formik for smooth form handling and validation.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+ Key Features:
+- Advanced filtering by brand, price per hour, and mileage range
+- Detailed car profiles including model, year, type, rental company, address, and mileage
+- Booking form with real-time validation (Formik + Yup)
+- Dynamic car list with pagination and “Load more” functionality
+- Loading indicators and notifications using React Toastify
+- Scroll-to-top button for improved navigation
 
-Currently, two official plugins are available:
+   Tech Stack:
+- React
+- Redux Toolkit
+- Formik & Yup
+- React Router
+- React Toastify
+- CSS Modules
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+  Project Structure:
+src/
+├── components/
+│   ├── CarList/
+│   ├── CarCard/
+│   ├── CarDetails/
+│   ├── CarFormOrder/
+│   └── Filter/
+├── redux/
+│   ├── car/
+│   └── brands/
+├── common/
+│   ├── Button/
+│   └── Loader/
 
-## Expanding the ESLint configuration
+ Getting Started:
+-npm install
+-npm start
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+
