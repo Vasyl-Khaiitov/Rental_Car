@@ -18,8 +18,14 @@ export default function CarCard({
   address,
   mileage,
 }) {
-  const formatedAddress = address?.split(",").slice(1).join(",");
-  const milesToKm = (miles) => (miles * 1.60934).toFixed(0);
+  const addressParts =
+    address
+      ?.split(",")
+      .slice(-2)
+      .map((part) => part.trim()) || [];
+
+  const milesToKm = (miles) =>
+    Math.round(miles * 1.60934).toLocaleString("uk-UA");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isFavorite = useSelector(selectIsFavoriteById(id));
@@ -60,15 +66,26 @@ export default function CarCard({
         </button>
       </div>
 
-      <h2 className={css.car_title}>
-        {brand},<span className={css.span_model}>{model}</span>
-      </h2>
-      <p className={css.car_year}>{year}</p>
-      <p className={css.car_price}>${price}</p>
-      <p className={css.car_location}>{formatedAddress}</p>
-      <p className={css.car_company}>{company}</p>
-      <p className={css.car_type}>{type}</p>
-      <p className={css.car_mileage}>{milesToKm(mileage)} km</p>
+      <div className={css.car_title_block}>
+        <h2 className={css.car_title}>
+          {brand}
+          <span className={css.span_model}>{model}</span>, {year}
+        </h2>
+        <p className={css.car_price}>${price}</p>
+      </div>
+
+      <p className={css.car_info_row}>
+        <span>{addressParts[0]}</span>
+        <Icon name="icon-Line" className={css.icon_line} />
+        <span>{addressParts[1]}</span>
+        <Icon name="icon-Line" className={css.icon_line} />
+        <span>{company}</span>
+        <Icon name="icon-Line" className={css.icon_line} />
+        <span>{type}</span>
+        <Icon name="icon-Line" className={css.icon_line} />
+        <span>{milesToKm(mileage)} km</span>
+      </p>
+
       <Button
         name="Read more"
         type="button"
