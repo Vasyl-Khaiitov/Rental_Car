@@ -23,7 +23,6 @@ export default function CarFromOrder() {
 
   const handleSubmit = async (values, actions) => {
     try {
-      console.log(values);
       toast.success("Booking submitted successfully!");
       actions.resetForm();
     } catch (error) {
