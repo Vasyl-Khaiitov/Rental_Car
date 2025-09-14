@@ -1,13 +1,16 @@
 import css from "./Filter.module.css";
+import * as Yup from "yup";
 import { Field, Form, Formik } from "formik";
 import Button from "../../common/Button/Button";
 import SelectInput from "../SelectInput/SelectInput";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilters } from "../../redux/car/slice"; // 👈 оновлено
-import { fetchCars } from "../../redux/car/operation"; // 👈 оновлено
+import { setFilters } from "../../redux/car/slice";
+import { fetchCars } from "../../redux/car/operation";
 import { selectBrands } from "../../redux/brands/selectors";
 import { useEffect } from "react";
 import { fetchCarBrands } from "../../redux/brands/operation";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialValues = {
   brand: "",
@@ -15,6 +18,18 @@ const initialValues = {
   mileageFrom: "",
   mileageTo: "",
 };
+
+const validationSchema = Yup.object({
+  mileageFrom: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(/^\d+$/, "Please enter digits only"),
+
+  mileageTo: Yup.string()
+    .nullable()
+    .notRequired()
+    .matches(/^\d+$/, "Please enter digits only"),
+});
 
 export default function Filter() {
   const dispatch = useDispatch();
@@ -47,11 +62,24 @@ export default function Filter() {
   }));
 
   const handleSubmit = (values, actions) => {
+    const { brand, rentalPrice, mileageFrom, mileageTo } = values;
+
+    const isAllEmpty =
+      !brand.trim() &&
+      !rentalPrice.trim() &&
+      !mileageFrom.trim() &&
+      !mileageTo.trim();
+
+    if (isAllEmpty) {
+      toast.warning("Please fill in at least one field before searching");
+      return;
+    }
+
     const filters = {
-      brand: values.brand,
-      rentalPrice: values.rentalPrice,
-      mileageFrom: values.mileageFrom,
-      mileageTo: values.mileageTo,
+      brand,
+      rentalPrice,
+      mileageFrom,
+      mileageTo,
       page: 1,
       limit: 12,
     };
@@ -63,7 +91,11 @@ export default function Filter() {
 
   return (
     <div>
-      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
         <Form className={css.form}>
           <SelectInput
             name="brand"
@@ -79,20 +111,30 @@ export default function Filter() {
             placeholder="Choose a price"
             options={priceOptions}
           />
-          <div className={css.mileageGroup}>
-            <label htmlFor="mileageFrom">Car mileage/km</label>
-            <Field
-              type="number"
-              name="mileageFrom"
-              id="mileageFrom"
-              placeholder="From"
-            />
-            <Field
-              type="number"
-              id="mileageTo"
-              name="mileageTo"
-              placeholder="To"
-            />
+          <div className={css.mileage_roup}>
+            <label htmlFor="mileageFrom" className={css.mileage_label}>
+              Car mileage/km
+            </label>
+            <div className={css.mileage_inputs}>
+              <Field
+                type="text"
+                name="mileageFrom"
+                id="mileageFrom"
+                placeholder="From"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                className={css.input_mileage}
+              />
+              <Field
+                type="text"
+                name="mileageTo"
+                id="mileageTo"
+                placeholder="To"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                className={`${css.input_mileage} ${css.input_mileage_right}`}
+              />
+            </div>
           </div>
           <Button
             type="submit"

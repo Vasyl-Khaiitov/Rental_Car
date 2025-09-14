@@ -3,6 +3,8 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loader from "./Loader/Loader";
 import Layout from "./Layout/Layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../pages/CatalogPage/CatalogPage"));
@@ -24,6 +26,7 @@ export default function App() {
           </Suspense>
         </Layout>
       </main>
+      <ToastContainer position="top-center" autoClose={3000} />
     </div>
   );
 }

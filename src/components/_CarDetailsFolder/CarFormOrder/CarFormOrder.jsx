@@ -1,7 +1,7 @@
 import { Field, Formik, Form, ErrorMessage } from "formik";
 import Button from "../../../common/Button/Button";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const validationSchema = Yup.object({
@@ -47,7 +47,6 @@ export default function CarFromOrder() {
             <Button type="submit" name="Send" paddingsX={58} />
           </Form>
         </Formik>
-        <ToastContainer position="top-right" autoClose={3000} />
       </div>
     </section>
   );
