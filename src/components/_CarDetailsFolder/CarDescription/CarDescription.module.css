@@ -1,4 +1,87 @@
+.image {
+}
+
 .icon {
   width: 16px;
   height: 16px;
+  margin-right: 4px;
+}
+.card_wrapper {
+  display: flex;
+  gap: 72px;
+
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.left_column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.image {
+  margin-top: 84px;
+  width: 100%;
+  border-radius: 19px;
+  object-fit: cover;
+}
+
+.right_column {
+  flex: 488px 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.basic_info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.title_block {
+  display: flex;
+  font-weight: var(--font-weight-semiBold);
+  line-height: 1.33333;
+  color: var(--main);
+  gap: 16px;
+  margin: 104px 0px 8px 0px;
+}
+
+.id {
+  align-self: flex-end;
+  color: var(--gray);
+}
+
+.block_location {
+  display: flex;
+  gap: 16px;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 16px;
+}
+.price_descr {
+  line-height: 1.33333;
+  color: var(--button);
+  font-weight: var(--font-weight-semiBold);
+  margin-bottom: 32px;
+}
+
+.description {
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 68px;
+}
+
+.section {
+  margin-bottom: 110px;
+}
+
+.title {
+  font-weight: var(--font-weight-semiBold);
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.list_items {
+  font-weight: var(--font-weight-medium);
+  margin-bottom: 16px;
 }

@@ -17,8 +17,9 @@ export default function CarDetails() {
 
   return (
     <>
-      <CarDescription car={car} />
-      <CarFromOrder />
+      <CarDescription car={car}>
+        <CarFromOrder />
+      </CarDescription>
     </>
   );
 }

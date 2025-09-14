@@ -1,4 +1,5 @@
-import { Field, Formik, Form, ErrorMessage } from "formik";
+import css from "./CarFormOrder.module.css";
+import { Field, Formik, Form } from "formik";
 import Button from "../../../common/Button/Button";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
@@ -26,28 +27,102 @@ export default function CarFromOrder() {
   };
 
   return (
-    <section>
-      <h2>Book your car now</h2>
-      <p>Stay connected! We are always ready to help you.</p>
-      <div>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={handleSubmit}
-          validationSchema={validationSchema}
-        >
-          <Form>
-            <Field type="text" name="username" placeholder="Name*" />
-            <ErrorMessage name="username" component="div" className="error" />
-            <Field type="text" name="email" placeholder="Email*" />
-            <ErrorMessage name="email" component="div" className="error" />
-            <Field type="date" name="calendar" placeholder="Booking date" />
-            <ErrorMessage name="calendar" component="div" className="error" />
-            <Field as="textarea" name="area" placeholder="Comment" />
-            <ErrorMessage name="area" component="div" className="error" />
-            <Button type="submit" name="Send" paddingsX={58} />
-          </Form>
-        </Formik>
-      </div>
+    <section className={css.section_order}>
+      <h2 className={css.title_order}>Book your car now</h2>
+      <p className={css.text_order}>
+        Stay connected! We are always ready to help you.
+      </p>
+
+      <Formik
+        initialValues={initialValues}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        {({ submitForm }) => (
+          <>
+            <Form className={css.form_order}>
+              <Field name="username">
+                {({ field, meta }) => (
+                  <>
+                    <input
+                      {...field}
+                      type="text"
+                      placeholder="Name*"
+                      className={`${css.input_order} ${
+                        meta.touched && meta.error ? css.input_error : ""
+                      }`}
+                    />
+                    {meta.touched && meta.error && (
+                      <div className={css.error}>{meta.error}</div>
+                    )}
+                  </>
+                )}
+              </Field>
+
+              <Field name="email">
+                {({ field, meta }) => (
+                  <>
+                    <input
+                      {...field}
+                      type="text"
+                      placeholder="Email*"
+                      className={`${css.input_order} ${
+                        meta.touched && meta.error ? css.input_error : ""
+                      }`}
+                    />
+                    {meta.touched && meta.error && (
+                      <div className={css.error}>{meta.error}</div>
+                    )}
+                  </>
+                )}
+              </Field>
+
+              <Field name="calendar">
+                {({ field, meta }) => (
+                  <>
+                    <input
+                      {...field}
+                      type="date"
+                      placeholder="Booking date"
+                      className={`${css.input_order} ${
+                        meta.touched && meta.error ? css.input_error : ""
+                      }`}
+                    />
+                    {meta.touched && meta.error && (
+                      <div className={css.error}>{meta.error}</div>
+                    )}
+                  </>
+                )}
+              </Field>
+
+              <Field name="area">
+                {({ field, meta }) => (
+                  <>
+                    <textarea
+                      {...field}
+                      placeholder="Comment"
+                      className={`${css.input_order} ${css.input_area} ${
+                        meta.touched && meta.error ? css.input_error : ""
+                      }`}
+                    />
+                    {meta.touched && meta.error && (
+                      <div className={css.error}>{meta.error}</div>
+                    )}
+                  </>
+                )}
+              </Field>
+            </Form>
+
+            <Button
+              type="button"
+              name="Send"
+              paddingsX={58}
+              onClick={submitForm}
+              className={css.btn_order}
+            />
+          </>
+        )}
+      </Formik>
     </section>
   );
 }
