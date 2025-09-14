@@ -32,6 +32,7 @@
   width: 576px;
   height: 48px;
   background-color: var(--inputs);
+  cursor: pointer;
 }
 
 .input_order:focus {
