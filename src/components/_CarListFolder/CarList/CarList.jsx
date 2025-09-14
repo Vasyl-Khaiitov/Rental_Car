@@ -15,6 +15,7 @@ import ButtonUp from "../../../common/ButtonUp/ButtonUp";
 import Button from "../../../common/Button/Button";
 import { setFilters, setPage } from "../../../redux/car/slice";
 import { isActiveFilter } from "../../../utils/activFilterUtils";
+import Loader from "../../Loader/Loader";
 
 export default function CarList() {
   const dispatch = useDispatch();
@@ -57,52 +58,61 @@ export default function CarList() {
 
   return (
     <>
-      {cars.length === 0 && hasFetched && !isLoading && (
-        <div className={css.no_results}>
-          <p className={css.text_notFound}>
-            No cars found matching your criteria.
-          </p>
-          <Button
-            type="button"
-            name="Reset filters"
-            className={css.btn_reset}
-            styleType="white"
-            onClick={handleResetFilters}
-            paddingsX={24}
-          />
+      {isLoading ? (
+        <div className={css.loader_wrapper}>
+          <Loader size={32} />
         </div>
-      )}
-      <ul className={css.car_list}>
-        {cars.map((car) => (
-          <li key={car.id} className={css.list_items}>
-            <CarCard
-              id={car.id}
-              img={car.img}
-              brand={car.brand}
-              model={car.model}
-              year={car.year}
-              type={car.type}
-              price={car.rentalPrice}
-              company={car.rentalCompany}
-              address={car.address}
-              mileage={car.mileage}
+      ) : (
+        <>
+          {cars.length === 0 && hasFetched && (
+            <div className={css.no_results}>
+              <p className={css.text_notFound}>
+                No cars found matching your criteria.
+              </p>
+              <Button
+                type="button"
+                name="Reset filters"
+                className={css.btn_reset}
+                styleType="white"
+                onClick={handleResetFilters}
+                paddingsX={24}
+              />
+            </div>
+          )}
+
+          <ul className={css.car_list}>
+            {cars.map((car) => (
+              <li key={car.id} className={css.list_items}>
+                <CarCard
+                  id={car.id}
+                  img={car.img}
+                  brand={car.brand}
+                  model={car.model}
+                  year={car.year}
+                  type={car.type}
+                  price={car.rentalPrice}
+                  company={car.rentalCompany}
+                  address={car.address}
+                  mileage={car.mileage}
+                />
+              </li>
+            ))}
+          </ul>
+
+          {page < totalPages && (
+            <Button
+              type="button"
+              name="Load more"
+              paddingsX={38}
+              className={css.btn_loadMore}
+              styleType="white"
+              onClick={handleLoadMore}
             />
-          </li>
-        ))}
-      </ul>
+          )}
 
-      {page < totalPages && (
-        <Button
-          type="button"
-          name="Load more"
-          paddingsX={38}
-          className={css.btn_loadMore}
-          styleType="white"
-          onClick={handleLoadMore}
-        />
+          <ButtonUp />
+        </>
       )}
-
-      <ButtonUp />
     </>
   );
 }

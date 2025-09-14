@@ -4,6 +4,7 @@ import Button from "../../../common/Button/Button";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../../Loader/Loader";
 
 const validationSchema = Yup.object({
   username: Yup.string().required("Name is required"),
@@ -20,12 +21,17 @@ export default function CarFromOrder() {
     area: "",
   };
 
-  const handleSubmit = (values, actions) => {
-    console.log(values);
-    toast.success("Booking submitted successfully!");
-    actions.resetForm();
+  const handleSubmit = async (values, actions) => {
+    try {
+      console.log(values);
+      toast.success("Booking submitted successfully!");
+      actions.resetForm();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      actions.setSubmitting(false);
+    }
   };
-
   return (
     <section className={css.section_order}>
       <h2 className={css.title_order}>Book your car now</h2>
@@ -38,7 +44,7 @@ export default function CarFromOrder() {
         onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        {({ submitForm }) => (
+        {({ submitForm, isSubmitting }) => (
           <>
             <Form className={css.form_order}>
               <Field name="username">
@@ -114,11 +120,20 @@ export default function CarFromOrder() {
             </Form>
 
             <Button
-              type="button"
-              name="Send"
+              type="submit"
+              name={
+                isSubmitting ? (
+                  <div className={css.loader_wrapper}>
+                    <Loader size={12} />
+                  </div>
+                ) : (
+                  "Send"
+                )
+              }
               paddingsX={58}
               onClick={submitForm}
               className={css.btn_order}
+              disabled={isSubmitting}
             />
           </>
         )}

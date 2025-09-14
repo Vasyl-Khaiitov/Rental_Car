@@ -11,6 +11,7 @@ import { useEffect } from "react";
 import { fetchCarBrands } from "../../redux/brands/operation";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "../Loader/Loader";
 
 const initialValues = {
   brand: "",
@@ -61,7 +62,7 @@ export default function Filter() {
     name: brand,
   }));
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     const { brand, rentalPrice, mileageFrom, mileageTo } = values;
 
     const isAllEmpty =
@@ -72,6 +73,7 @@ export default function Filter() {
 
     if (isAllEmpty) {
       toast.warning("Please fill in at least one field before searching");
+      actions.setSubmitting(false);
       return;
     }
 
@@ -84,9 +86,15 @@ export default function Filter() {
       limit: 12,
     };
 
-    dispatch(setFilters(filters));
-    dispatch(fetchCars(filters));
-    actions.resetForm();
+    try {
+      dispatch(setFilters(filters));
+      await dispatch(fetchCars(filters));
+      actions.resetForm();
+    } catch (error) {
+      toast.error("Something went wrong while fetching cars");
+    } finally {
+      actions.setSubmitting(false);
+    }
   };
 
   return (
@@ -96,53 +104,65 @@ export default function Filter() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className={css.form}>
-          <SelectInput
-            name="brand"
-            className={css.select_brand}
-            labelText="Car brand"
-            placeholder="Choose a brand"
-            options={brandOptions}
-          />
-          <SelectInput
-            name="rentalPrice"
-            className={css.select_price}
-            labelText="Price/1 hour"
-            placeholder="Choose a price"
-            options={priceOptions}
-          />
-          <div className={css.mileage_roup}>
-            <label htmlFor="mileageFrom" className={css.mileage_label}>
-              Car mileage/km
-            </label>
-            <div className={css.mileage_inputs}>
-              <Field
-                type="text"
-                name="mileageFrom"
-                id="mileageFrom"
-                placeholder="From"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                className={css.input_mileage}
-              />
-              <Field
-                type="text"
-                name="mileageTo"
-                id="mileageTo"
-                placeholder="To"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                className={`${css.input_mileage} ${css.input_mileage_right}`}
-              />
+        {({ isSubmitting }) => (
+          <Form className={css.form}>
+            <SelectInput
+              name="brand"
+              className={css.select_brand}
+              labelText="Car brand"
+              placeholder="Choose a brand"
+              options={brandOptions}
+            />
+            <SelectInput
+              name="rentalPrice"
+              className={css.select_price}
+              labelText="Price/1 hour"
+              placeholder="Choose a price"
+              options={priceOptions}
+            />
+
+            <div className={css.mileage_roup}>
+              <label htmlFor="mileageFrom" className={css.mileage_label}>
+                Car mileage/km
+              </label>
+              <div className={css.mileage_inputs}>
+                <Field
+                  type="text"
+                  name="mileageFrom"
+                  id="mileageFrom"
+                  placeholder="From"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  className={css.input_mileage}
+                />
+                <Field
+                  type="text"
+                  name="mileageTo"
+                  id="mileageTo"
+                  placeholder="To"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  className={`${css.input_mileage} ${css.input_mileage_right}`}
+                />
+              </div>
             </div>
-          </div>
-          <Button
-            type="submit"
-            name="Search"
-            paddingsX={51}
-            className={css.btn_srch}
-          />
-        </Form>
+
+            <Button
+              type="submit"
+              className={css.btn_srch}
+              paddingsX={51}
+              name={
+                isSubmitting ? (
+                  <div className={css.loader_wrapper}>
+                    <Loader size={12} />
+                  </div>
+                ) : (
+                  "Search"
+                )
+              }
+            />
+          </Form>
+        )}
       </Formik>
     </div>
   );
