@@ -40,7 +40,7 @@ export default function CarDescription({ car, children }) {
         <div className={css.basic_info}>
           <div className={css.title_block}>
             <h2>{`${brand} ${model}, ${year}`}</h2>
-            <p className={css.id}>Id: {String(id).slice(0, 23)}...</p>
+            <p className={css.id}>Id: {String(id).slice(0, 3)}</p>
           </div>
           <div className={css.block_location}>
             <p className={css.location}>
