@@ -22,14 +22,17 @@ const initialValues = {
 
 const validationSchema = Yup.object({
   mileageFrom: Yup.string()
+    .matches(/^\d+$/, "Please enter digits only")
     .nullable()
-    .notRequired()
-    .matches(/^\d+$/, "Please enter digits only"),
-
+    .notRequired(),
   mileageTo: Yup.string()
+    .matches(/^\d+$/, "Please enter digits only")
     .nullable()
     .notRequired()
-    .matches(/^\d+$/, "Please enter digits only"),
+    .test("is-greater", "To must be greater than From", function (value) {
+      const { mileageFrom } = this.parent;
+      return !value || !mileageFrom || Number(value) >= Number(mileageFrom);
+    }),
 });
 
 export default function Filter() {
