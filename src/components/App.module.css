@@ -1,8 +1,4 @@
-.appWrapper {
-  width: 1440px;
-}
-
 .mainContent {
   width: 1200px;
-  margin: 0px 120px;
+  margin: 0 auto;
 }

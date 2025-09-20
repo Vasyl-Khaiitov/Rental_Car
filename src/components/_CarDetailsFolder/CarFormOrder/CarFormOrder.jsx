@@ -9,7 +9,6 @@ import Loader from "../../Loader/Loader";
 const validationSchema = Yup.object({
   username: Yup.string().required("Name is required"),
   email: Yup.string().email("Invalid email").required("Email is required"),
-  calendar: Yup.date().required("Date is required"),
   area: Yup.string(),
 });
 
