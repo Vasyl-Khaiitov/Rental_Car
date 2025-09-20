@@ -3,8 +3,9 @@ import Icon from "../../../assets/Icon/Icon";
 import Button from "../../../common/Button/Button";
 import { addFavorite, removeFavorite } from "../../../redux/favoriteCar/slice";
 import css from "./CarCard.module.css";
-import { useNavigate } from "react-router-dom";
 import { selectIsFavoriteById } from "../../../redux/favoriteCar/selectors";
+import { useNavigationLoader } from "../../Hero/useLoader";
+import Loader from "../../Loader/Loader";
 
 export default function CarCard({
   id,
@@ -18,6 +19,8 @@ export default function CarCard({
   address,
   mileage,
 }) {
+  const { isNavigating, navigateWithLoader } = useNavigationLoader();
+
   const addressParts =
     address
       ?.split(",")
@@ -26,7 +29,6 @@ export default function CarCard({
 
   const milesToKm = (miles) =>
     Math.round(miles * 1.60934).toLocaleString("uk-UA");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const isFavorite = useSelector(selectIsFavoriteById(id));
 
@@ -39,7 +41,7 @@ export default function CarCard({
   };
 
   const handleReadMore = () => {
-    navigate(`/catalog/${id}`);
+    navigateWithLoader(`/catalog/${id}`);
   };
 
   return (
@@ -87,12 +89,13 @@ export default function CarCard({
       </p>
 
       <Button
-        name="Read more"
         type="button"
         paddingsX={88}
         className={css.btn_ReadMore}
         onClick={handleReadMore}
-      />
+      >
+        {isNavigating ? <Loader size="12" /> : "Read more"}
+      </Button>
     </>
   );
 }

@@ -1,8 +1,15 @@
 import css from "./Hero.module.css";
 import Button from "../../common/Button/Button";
-import { Link } from "react-router-dom";
+import { useNavigationLoader } from "./useLoader";
+import Loader from "../Loader/Loader";
 
 export default function Hero() {
+  const { isNavigating, navigateWithLoader } = useNavigationLoader();
+
+  const handleNavigate = () => {
+    navigateWithLoader("/catalog");
+  };
+
   return (
     <div className={css.hero}>
       <div className={css.container}>
@@ -10,15 +17,15 @@ export default function Hero() {
         <p className={css.text}>
           Reliable and budget-friendly rentals for any journey
         </p>
-        <Link to="/catalog">
-          <Button
-            type="button"
-            name="View Catalog"
-            paddingsY="12"
-            paddingsX="88"
-            className={css.button}
-          />
-        </Link>
+        <Button
+          type="button"
+          paddingsY="12"
+          paddingsX="88"
+          className={css.button}
+          onClick={handleNavigate}
+        >
+          {isNavigating ? <Loader size="12" /> : "View Catalog"}
+        </Button>
       </div>
     </div>
   );
